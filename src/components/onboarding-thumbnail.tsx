@@ -3,6 +3,7 @@
 import { CheckCircledIcon } from "@radix-ui/react-icons";
 import { FC, ReactNode, useRef } from "react";
 import { useIntersection } from "react-use";
+import { Thumbnail } from "./Thumbnail";
 import { BrexLogo } from "./brex-logo";
 import { MercuryLogo } from "./mercury-logo";
 import { PlaidLogo } from "./plaid-logo";
@@ -20,10 +21,7 @@ export const OnboardingThumbnail: FC = () => {
   const intersecting = !!intersection && intersection.isIntersecting;
 
   return (
-    <div
-      ref={intersectionRef}
-      className="flex flex-grow gap-5 overflow-hidden rounded-lg rounded-b-none border-[1px] border-b-0 border-white border-opacity-10 bg-gray-900 p-5 sm:p-6"
-    >
+    <Thumbnail ref={intersectionRef} className="flex flex-grow gap-5">
       <div className="flex-shrink-0">
         <PuzzleLogoFull active={intersecting} />
         <div className="flex flex-col gap-2 sm:gap-2.5">
@@ -66,7 +64,7 @@ export const OnboardingThumbnail: FC = () => {
           <PlaidLogo active={intersecting} className="sm:h-9 sm:w-9" />
         </div>
       </div>
-    </div>
+    </Thumbnail>
   );
 };
 
