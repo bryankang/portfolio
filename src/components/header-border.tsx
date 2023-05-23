@@ -8,7 +8,7 @@ export const HeaderBorder: FC = () => {
 
   return (
     <div
-      className={`absolute bottom-0 left-4 right-4 h-[1px] bg-white transition duration-75 ease-in-out ${
+      className={`absolute bottom-0 left-0 right-0 h-[1px] bg-white transition duration-75 ease-in-out  ${
         y === 0 ? "opacity-0" : "opacity-10"
       }`}
     />

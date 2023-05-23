@@ -1,62 +1,35 @@
 import fs from "fs/promises";
 import path from "path";
-import { ReactNode } from "react";
 import readingTime, { ReadTimeResults } from "reading-time";
 
-export interface Post {
-  // slug: string;
-  // duration: ReadTimeResults;
-  // data: {
-  //   title: string;
-  //   date: string;
-  //   tags: string[];
-  // };
-  content: ReactNode;
-  thumbnail: ReactNode;
-  metadata: {
-    slug: string;
-    duration: ReadTimeResults;
-    title: string;
-    date: string;
-    tags: string[];
-  };
+export interface PostMetadata {
+  slug: string;
+  duration: ReadTimeResults;
+  title: string;
+  company?: string;
+  date: string;
+  tags: string[];
 }
 
 const POSTS_DIRECTORY_PATH = path.join(process.cwd(), "src/posts");
 
-export async function getPosts() {
+export async function getPostsMetadata() {
   const filenames = await fs.readdir(POSTS_DIRECTORY_PATH);
-  const posts = await Promise.all(
+  const postsMetadata = await Promise.all(
     filenames.map(async (filename) => {
-      const post = await getPost(filename);
+      const post = await getPostMetadata(filename);
       return post;
     })
   );
-  posts.sort((a, b) => (a.metadata.date < b.metadata.date ? -1 : 1));
-  return posts;
+  postsMetadata.sort((a, b) => (a.date < b.date ? -1 : 1));
+  return postsMetadata;
 }
 
-export async function getPost(filename: string) {
+export async function getPostMetadata(filename: string) {
   const filePath = path.join(POSTS_DIRECTORY_PATH, filename);
   const content = await fs.readFile(filePath, "utf8");
-  // const post = grayMatter(content);
 
-  const {
-    default: Content,
-    Thumbnail,
-    metadata,
-  } = await import(`../posts/${filename}`);
-
-  // if (
-  //   !post.data.title ||
-  //   !post.data.date ||
-  //   !post.data.tags ||
-  //   !post.data.tags.length
-  // ) {
-  //   throw new Error(
-  //     `Missing metadata in post ${post.content.substring(0, 100)}`
-  //   );
-  // }
+  const { metadata } = await import(`../posts/${filename}`);
 
   if (
     !metadata.title ||
@@ -68,15 +41,20 @@ export async function getPost(filename: string) {
   }
 
   return {
-    // ...post,
-    // content: <Content />,
-    // thumbnail: <Thumbnail />,
-    metadata: {
-      ...metadata,
-      slug: path.parse(filename).name,
-      duration: readingTime(content),
-    },
-  } as Post;
+    ...metadata,
+    slug: path.parse(filename).name,
+    duration: readingTime(content),
+  } as PostMetadata;
+}
+
+export async function loadPost(filename: string) {
+  const { default: Content } = await import(`../posts/${filename}`);
+  const metadata = await getPostMetadata(filename);
+
+  return {
+    Content,
+    metadata,
+  };
 }
 
 // export async function loadPost(filename: string) {

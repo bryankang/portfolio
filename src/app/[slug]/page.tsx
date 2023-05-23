@@ -1,10 +1,8 @@
-import { getPost, getPosts } from "@/utils/posts";
+import { getPostsMetadata, loadPost } from "@/utils/posts";
 import Link from "next/link";
 
 export default async function Page({ params }: { params: { slug: string } }) {
-  // const { Post, post } = await loadPost(`${params.slug}.mdx`);
-
-  const { content, metadata } = await getPost(`${params.slug}.mdx`);
+  const { Content, metadata } = await loadPost(`${params.slug}.mdx`);
 
   return (
     <div className="prose mx-auto min-h-screen dark:prose-invert">
@@ -16,16 +14,16 @@ export default async function Page({ params }: { params: { slug: string } }) {
           {metadata.title} {JSON.stringify(metadata.tags)}
           {metadata.duration.text}
         </header>
-        {content}
+        <Content />
       </main>
     </div>
   );
 }
 
 export async function generateStaticParams() {
-  const posts = await getPosts();
-  const params = posts.map((post) => ({
-    slug: post.metadata.slug,
+  const postsMetadata = await getPostsMetadata();
+  const params = postsMetadata.map((metadata) => ({
+    slug: metadata.slug,
   }));
   return params;
 }

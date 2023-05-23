@@ -1,21 +1,26 @@
 import { FC, useRef } from "react";
-import { useIntersection } from "react-use";
-import { Thumbnail } from "./Thumbnail";
+import { useIntersection, useWindowSize } from "react-use";
+import { Thumbnail } from "./thumbnail";
 
-export const TrWorkoutPlayerThumbnail: FC = () => {
+export const TrWorkoutPlayerThumbnail: FC<{ active?: boolean }> = ({
+  active,
+}) => {
   const intersectionRef = useRef(null);
   const intersection = useIntersection(intersectionRef, {
     root: null,
-    rootMargin: "0px",
+    rootMargin: "-40px",
     threshold: 1,
   });
+  const windowSize = useWindowSize();
 
-  const intersecting = !!intersection && intersection.isIntersecting;
+  const intersecting =
+    active ||
+    (windowSize.width < 640 && !!intersection && intersection.isIntersecting);
 
   return (
     <Thumbnail ref={intersectionRef} className="h-full ">
       <div
-        className={`mb-6 text-center text-sm transition-colors duration-300 sm:text-base ${
+        className={`mb-6 text-center text-sm transition-colors duration-100 sm:text-base ${
           intersecting ? "text-gray-400" : "text-gray-600"
         }`}
       >
@@ -24,7 +29,7 @@ export const TrWorkoutPlayerThumbnail: FC = () => {
       <div className="flex justify-center">
         <Chart
           active={intersecting}
-          className={`mr-6 transition-opacity duration-300 sm:mr-10 ${
+          className={`mr-6 transition-opacity duration-100 sm:mr-10 ${
             intersecting ? "opacity-100" : "opacity-50"
           }`}
         />
@@ -34,7 +39,7 @@ export const TrWorkoutPlayerThumbnail: FC = () => {
               className={`${intersecting ? "text-[#57B1F2]" : "text-gray-600"}`}
             />
             <div
-              className={`whitespace-nowrap text-[10px] transition-colors duration-300 sm:text-[11px] ${
+              className={`whitespace-nowrap text-[10px] transition-colors duration-100 sm:text-[11px] ${
                 intersecting ? "text-gray-500" : "text-gray-600"
               }`}
             >
@@ -46,7 +51,7 @@ export const TrWorkoutPlayerThumbnail: FC = () => {
               className={`${intersecting ? "text-[#F6D681]" : "text-gray-600"}`}
             />
             <div
-              className={`whitespace-nowrap text-[10px] transition-colors duration-300 sm:text-[11px] ${
+              className={`whitespace-nowrap text-[10px] transition-colors duration-100 sm:text-[11px] ${
                 intersecting ? "text-gray-500" : "text-gray-600"
               }`}
             >
@@ -58,7 +63,7 @@ export const TrWorkoutPlayerThumbnail: FC = () => {
               className={`${intersecting ? "text-[#E271A7]" : "text-gray-600"}`}
             />
             <div
-              className={`whitespace-nowrap text-[10px] transition-colors duration-300 sm:text-[11px] ${
+              className={`whitespace-nowrap text-[10px] transition-colors duration-100 sm:text-[11px] ${
                 intersecting ? "text-gray-500" : "text-gray-600"
               }`}
             >
@@ -79,7 +84,7 @@ const Dot: FC<{ className?: string }> = ({ className }) => {
       viewBox="0 0 14 14"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={`transition-colors duration-300 ${className}`}
+      className={`transition-colors duration-100 ${className}`}
     >
       <g filter="url(#filter0_f_62_1567)">
         <circle cx="7" cy="7" r="3" fill="currentColor" />
@@ -93,9 +98,9 @@ const Dot: FC<{ className?: string }> = ({ className }) => {
           width="14"
           height="14"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend
             mode="normal"
             in="SourceGraphic"
@@ -131,7 +136,7 @@ const Chart: FC<{
       <path
         fill="url(#a)"
         d="M3 87.638V118.5h200V89.131l-28.424-27.378V26.91H99.641v34.844H76.9V6.5h-46.51v55.253L3 87.638Z"
-        className="transition-all duration-300"
+        className="transition-all duration-100"
       />
       <path
         stroke="#7A7A7A"
@@ -142,7 +147,7 @@ const Chart: FC<{
       <path
         fill="url(#b)"
         d="M3 88.873c1.4-1.4 2.028-2.078 3.01-3.764.328-.562.668-.743 1.411 0 .831.832.132-.21.84-.585 1.508-.799.447-1.663 1.389-2.816.366-.448 1.984-.724 2.54-.585.575.144.305-2.656 2.155-1.628 2.681 1.492.539-4.458 3.452-3.383.685.253 1.37-2.33 1.79-2.871.566-.727 1.358-1.29 1.81-2.268.266-.578 1.03-2.435 1.662-2.505 1.384-.154 1.988.349 2.813-.914.512-.784.448-2.378 1.626-2.378.291 0 1.719-.261 1.79-.512.4-1.4 1.17-2.152 1.17-3.547V7.737c-.086-3.091 1.6-1.153 3.123-1.153.629 0 2.203-.844 2.43-.768 1.005.335 1.805 2.048 2.996 2.048.857 0 1.672-.338 2.21-.877.286-.286.729-.433 1.079-.238.546.304.755-.716 1.078-1.08 1.137-1.28.73.916 1.552 1.574 1.018.815 1.123-1.11 1.973-1.299 1.064-.236 1.602 1.248 2.466 1.299.752.044 1.622.329 2.302.329 2.606 0 2.4-4.572 4.11-4.572 1.332 0 2.695 4.39 3.125 5.358.191.431 2.377-2.134 2.63-2.578.235-.411.734-.035.987.146.674.482.817.066 1.388-.33.33-.228 1.015-.95 1.425-.95.53 0 .678.595 1.133.622 1.988.117 2.712 4.005 4.275 2.615 1.096-.975 3.469-2.842 4-.896.766-.842 1.887-1.024 2.508-.403V61.41c0 3.509.295 1.078 2.006-.292.338-.271.905.029 1.168.292 1.293 1.294.234.656 1.498-.292.17-.128.616.953.658 1.079.185.555 1.038.392 1.498.274.522-.135.981-.878 1.48-.878.538 0 1.052.293 1.625.293 1.26 0 1.489.143 2.138 1.298.73 1.3 1.258 1.35 1.808-.165.368-1.011 1.12-.928 1.973-.548.67.297 5.97-.23 6.723-.274V27.45c0-.845.969.223 1.003-.622.043-1.063-.154-2.35.502-.728l.142.357c.047.072.154.27.359.682.561 1.123.779.924 1.004-.31.141-.777.812-.106 1.003.017.307.2 1.163-.329 1.505-.329 1.2 0 .125 2.315 1.077 2.103.24-.053 1.805-1.95 2.065-1.481.717 1.293.73 3.075.73.402 0-.213.171-3.146.877-2.761 2.344 1.28 1.238 4.463 1.773 6.845.299 1.33.719 2.013 1.003 3.34.077.358 1.004 3.695 1.004 2.996l.605-5.519V27.14c0-6.775 1.743 2.916 3.946 1.756 1.017-.536 2.614-1.453 3.27-2.396.154-.222.941-2.035 1.333-1.664.612.578.75 1.844.987 2.615.376 1.223 2.149-.128 2.959-.128.962 0 2.302 1.28 2.96.658 1.107-1.047.574-.233 1.388.256.332.2 1.776-2.23 2.558-2.23.83 0 .878.791 1.498.968.836.24 1.479-.471 2.283-.292.806.18 1.717.856 2.394 1.298 1.192.78 1.352-.76 2.374-.658 1.828.183 1.49 1.84 3.453.823 1.107-.573 5.885-1.728 7.122-1.17V118H3V88.873Z"
-        className="transition-all duration-300"
+        className="transition-all duration-100"
       />
       <g filter="url(#c)">
         <path
@@ -206,13 +211,13 @@ const Chart: FC<{
           <stop
             stopColor={active ? "#69C0FF" : "#B6B6CC"}
             stopOpacity={0.35}
-            className="transition-all duration-300"
+            className="transition-all duration-100"
           />
           <stop
             offset={1}
             stopColor={active ? "#D9D9D9" : "#B6B6CC"}
             stopOpacity={0}
-            className="transition-all duration-300"
+            className="transition-all duration-100"
           />
         </linearGradient>
         <linearGradient
@@ -225,12 +230,12 @@ const Chart: FC<{
         >
           <stop
             stopColor={active ? "#69C0FF" : "#B6B6CC"}
-            className="transition-all duration-300"
+            className="transition-all duration-100"
           />
           <stop
             offset={1}
             stopColor={active ? "#57B1F2" : "#B6B6CC"}
-            className="transition-all duration-300"
+            className="transition-all duration-100"
           />
         </linearGradient>
         <linearGradient
@@ -243,12 +248,12 @@ const Chart: FC<{
         >
           <stop
             stopColor={active ? "#69C0FF" : "#B6B6CC"}
-            className="transition-all duration-300"
+            className="transition-all duration-100"
           />
           <stop
             offset={1}
             stopColor={active ? "#57B1F2" : "#B6B6CC"}
-            className="transition-all duration-300"
+            className="transition-all duration-100"
           />
         </linearGradient>
         <linearGradient
@@ -261,12 +266,12 @@ const Chart: FC<{
         >
           <stop
             stopColor={active ? "#FCE199" : "#B6B6CC"}
-            className="transition-all duration-300"
+            className="transition-all duration-100"
           />
           <stop
             offset={1}
             stopColor={active ? "#F6D681" : "#B6B6CC"}
-            className="transition-all duration-300"
+            className="transition-all duration-100"
           />
         </linearGradient>
         <linearGradient
@@ -279,12 +284,12 @@ const Chart: FC<{
         >
           <stop
             stopColor={active ? "#FCE199" : "#B6B6CC"}
-            className="transition-all duration-300"
+            className="transition-all duration-100"
           />
           <stop
             offset={1}
             stopColor={active ? "#F6D681" : "#B6B6CC"}
-            className="transition-all duration-300"
+            className="transition-all duration-100"
           />
         </linearGradient>
         <linearGradient
@@ -297,12 +302,12 @@ const Chart: FC<{
         >
           <stop
             stopColor={active ? "#F08EBD" : "#B6B6CC"}
-            className="transition-all duration-300"
+            className="transition-all duration-100"
           />
           <stop
             offset={1}
             stopColor={active ? "#E271A7" : "#B6B6CC"}
-            className="transition-all duration-300"
+            className="transition-all duration-100"
           />
         </linearGradient>
         <linearGradient
@@ -315,12 +320,12 @@ const Chart: FC<{
         >
           <stop
             stopColor={active ? "#F08EBD" : "#B6B6CC"}
-            className="transition-all duration-300"
+            className="transition-all duration-100"
           />
           <stop
             offset={1}
             stopColor={active ? "#E271A7" : "#B6B6CC"}
-            className="transition-all duration-300"
+            className="transition-all duration-100"
           />
         </linearGradient>
         <filter

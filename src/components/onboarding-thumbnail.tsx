@@ -2,23 +2,26 @@
 
 import { CheckCircledIcon } from "@radix-ui/react-icons";
 import { FC, ReactNode, useRef } from "react";
-import { useIntersection } from "react-use";
-import { Thumbnail } from "./Thumbnail";
+import { useIntersection, useWindowSize } from "react-use";
 import { BrexLogo } from "./brex-logo";
 import { MercuryLogo } from "./mercury-logo";
 import { PlaidLogo } from "./plaid-logo";
 import { PuzzleLogoFull } from "./puzzle-logo";
+import { Thumbnail } from "./thumbnail";
 import { UncheckedCircledIcon } from "./unchecked-circle-icon";
 
-export const OnboardingThumbnail: FC = () => {
+export const OnboardingThumbnail: FC<{ active?: boolean }> = ({ active }) => {
   const intersectionRef = useRef(null);
   const intersection = useIntersection(intersectionRef, {
     root: null,
-    rootMargin: "0px",
+    rootMargin: "-40px",
     threshold: 1,
   });
+  const windowSize = useWindowSize();
 
-  const intersecting = !!intersection && intersection.isIntersecting;
+  const intersecting =
+    active ||
+    (windowSize.width < 640 && !!intersection && intersection.isIntersecting);
 
   return (
     <Thumbnail ref={intersectionRef} className="flex flex-grow gap-5">
@@ -44,14 +47,14 @@ export const OnboardingThumbnail: FC = () => {
       </div>
       <div className="flex-grow">
         <div
-          className={`mb-2 font-medium transition-colors duration-300 sm:text-lg ${
+          className={`mb-2 font-medium transition-colors duration-100 sm:text-lg ${
             intersecting ? "text-white" : "text-gray-400"
           }`}
         >
           Connect bank accounts
         </div>
         <p
-          className={`mb-3 text-[10px] transition-colors duration-300 sm:mb-4 sm:text-[12px] ${
+          className={`mb-3 text-[10px] transition-colors duration-100 sm:mb-4 sm:text-[12px] ${
             intersecting ? "text-gray-300" : "text-gray-500"
           }`}
         >
@@ -82,7 +85,7 @@ const Step: FC<{
           <CheckCircledIcon
             width={10}
             height={10}
-            className={`transition-colors duration-300 sm:h-4 sm:w-4 ${
+            className={`transition-colors duration-100 sm:h-4 sm:w-4 ${
               active ? "text-[#50FAAB]" : "text-gray-500"
             }`}
           />
@@ -90,7 +93,7 @@ const Step: FC<{
           <UncheckedCircledIcon
             width={10}
             height={10}
-            className={`transition-colors duration-300 sm:h-4 sm:w-4 ${
+            className={`transition-colors duration-100 sm:h-4 sm:w-4 ${
               active
                 ? current
                   ? "text-[#50FAAB]"
@@ -101,7 +104,7 @@ const Step: FC<{
         )}
         {!last && (
           <div
-            className={`absolute left-[4.5px] top-[9px] h-3 w-[1px] transition-colors duration-300 sm:left-[7.5px] sm:top-[15px] sm:h-3  ${
+            className={`absolute left-[4.5px] top-[9px] h-3 w-[1px] transition-colors duration-100 sm:left-[7.5px] sm:top-[15px] sm:h-3  ${
               active
                 ? completed
                   ? "bg-[#50FAAB]"
@@ -112,7 +115,7 @@ const Step: FC<{
         )}
       </div>
       <span
-        className={`text-[8px] font-medium transition-colors duration-300 sm:text-[10px] ${
+        className={`text-[8px] font-medium transition-colors duration-100 sm:text-[10px] ${
           active
             ? current
               ? "text-white"
