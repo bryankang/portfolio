@@ -14,17 +14,6 @@ export const OnboardingThumbnail: FC<{
   mobile?: boolean;
   className?: string;
 }> = ({ active, mobile, className }) => {
-  // const intersectionRef = useRef(null);
-  // const intersection = useIntersection(intersectionRef, {
-  //   root: null,
-  //   rootMargin: "0px",
-  //   threshold: 1,
-  // });
-  // const windowSize = useWindowSize();
-  // const mobile = windowSize.width < 640;
-
-  // const intersecting = active || (mobile && !!intersection?.isIntersecting);
-
   return (
     <Thumbnail className={`flex flex-grow gap-5 ${className}`}>
       <div className="flex-shrink-0">
