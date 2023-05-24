@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Thumbnail } from "./thumbnail";
+import { Thumbnail } from "./Thumbnail";
 
 export const TrWorkoutPlayerThumbnail: FC<{
   active?: boolean;
