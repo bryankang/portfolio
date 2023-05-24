@@ -2,7 +2,8 @@
 
 import { PostMetadata } from "@/utils/posts";
 import Link from "next/link";
-import { FC, useState } from "react";
+import { FC, useRef, useState } from "react";
+import { useIntersection, useWindowSize } from "react-use";
 import { OnboardingThumbnail } from "./onboarding-thumbnail";
 import { SegmentedControl } from "./segmented-control";
 import { TrWorkoutPlayerThumbnail } from "./tr-workout-player-thumbnail";
@@ -14,7 +15,7 @@ export const ProjectsSection: FC<{ postsMetadata: PostMetadata[] }> = ({
 
   return (
     <section className="flex flex-col items-center">
-      <h2 className="mb-4 text-center text-xl text-gray-50  sm:text-2xl">
+      <h2 className="mb-6 text-center text-xl text-gray-50  sm:text-2xl">
         Projects
       </h2>
 
@@ -58,14 +59,14 @@ export const ProjectsSection: FC<{ postsMetadata: PostMetadata[] }> = ({
         ]}
         value={category}
         onChange={(value) => setCategory(value)}
-        className="mb-4 w-full max-w-[360px]"
+        className="mb-12 w-full max-w-[360px]"
       />
 
-      <div className="max-w-[420px]">
+      <div className="grid max-w-[960px] grid-cols-1 gap-10 lg:grid-cols-2">
         {postsMetadata.map((metadata) => {
           return (
-            <Link href={`/${metadata.slug}`}>
-              <ProjectCard key={metadata.slug} metadata={metadata} />
+            <Link key={metadata.slug} href={`/${metadata.slug}`}>
+              <ProjectCard metadata={metadata} />
             </Link>
           );
         })}
@@ -76,15 +77,27 @@ export const ProjectsSection: FC<{ postsMetadata: PostMetadata[] }> = ({
 
 const ProjectCard: FC<{ metadata: PostMetadata }> = ({ metadata }) => {
   const ProjectThumbnail = getThumbnail(metadata.slug);
-  const [active, setActive] = useState(false);
+  const [hovering, setHovering] = useState(false);
+  const intersectionRef = useRef(null);
+  const intersection = useIntersection(intersectionRef, {
+    root: null,
+    rootMargin: "0px",
+    threshold: 1,
+  });
+  const windowSize = useWindowSize();
+  const mobile = windowSize.width < 640;
+
+  const active = hovering || (mobile && !!intersection?.isIntersecting);
 
   return (
     <div
-      onMouseOver={() => setActive(true)}
-      onMouseLeave={() => setActive(false)}
-      className={`mb-8 flex h-72 flex-col rounded-lg border-[1px] border-white border-opacity-10 bg-gray-950 px-4 gradient-mask-b-50 sm:px-6`}
+      ref={intersectionRef}
+      onMouseOver={() => setHovering(true)}
+      onMouseLeave={() => setHovering(false)}
+      className={`group relative flex h-80 flex-col overflow-hidden rounded-lg border-[1px] border-white border-opacity-10 bg-gray-950 px-4  sm:px-6`}
     >
-      <header className="flex flex-col items-center p-4 text-center">
+      <div className="absolute inset-[1px] bg-project-card opacity-0 transition-opacity duration-100 group-hover:opacity-100" />
+      <header className="flex flex-col items-center p-6 text-center">
         <h3 className=" text-lg font-semibold text-gray-100">
           {metadata.title}
         </h3>
@@ -94,7 +107,11 @@ const ProjectCard: FC<{ metadata: PostMetadata }> = ({ metadata }) => {
           {metadata.company}
         </span>
       </header>
-      <ProjectThumbnail active={active} />
+      <ProjectThumbnail
+        active={active}
+        mobile={mobile}
+        className="relative bottom-[-8px]"
+      />
     </div>
   );
 };
@@ -106,6 +123,10 @@ function getThumbnail(slug: string) {
     }
     case "tr-workout-player": {
       return TrWorkoutPlayerThumbnail;
+    }
+    case "a": {
+      return () => <></>;
+      // return TrWorkoutPlayerThumbnail;
     }
     default: {
       throw new Error(`Invalid slug: ${slug}`);

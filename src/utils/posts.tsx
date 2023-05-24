@@ -7,6 +7,7 @@ export interface PostMetadata {
   duration: ReadTimeResults;
   title: string;
   company?: string;
+  roles: string[];
   date: string;
   tags: string[];
 }
@@ -34,6 +35,7 @@ export async function getPostMetadata(filename: string) {
   if (
     !metadata.title ||
     !metadata.date ||
+    !metadata.roles ||
     !metadata.tags ||
     !metadata.tags.length
   ) {

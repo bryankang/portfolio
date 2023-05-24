@@ -27,6 +27,14 @@
   *::-webkit-scrollbar-thumb:hover {
     background-color: theme('backgroundColor.gray.700');
   }
+
+  .prose a {
+    @apply font-normal
+  }
+
+  .prose h1 {
+    /* @apply font-medium */
+  }
 }
 
 /* :root {

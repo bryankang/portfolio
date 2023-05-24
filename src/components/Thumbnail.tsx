@@ -13,7 +13,7 @@ export const Thumbnail: ForwardRefExoticComponent<
   return (
     <div
       ref={ref}
-      className={`overflow-hidden rounded-lg rounded-b-none border-[1px] border-b-0 border-white border-opacity-10 bg-gray-900 p-5 sm:p-6 ${className}`}
+      className={`overflow-hidden rounded-lg border-[1px] border-b-0 border-white border-opacity-10 bg-gray-900 p-5 gradient-mask-b-30 sm:p-6 ${className}`}
       {...rest}
     />
   );

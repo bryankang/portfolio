@@ -25,7 +25,12 @@ module.exports = {
       backgroundImage: {
         "main-header":
           "linear-gradient(90deg, #FF75C3 0%, #FFA647 20%, #FFE83F 40%, #9FFF5B 60%, #70E2FF 80%, #CD93FF 100%);",
+        "project-card":
+          "radial-gradient(420px circle at 50% 50%,rgba(255,255,255,0.05),transparent);",
       },
+      // typography: ({ theme }) => ({
+
+      // })
     },
   },
   plugins: [
