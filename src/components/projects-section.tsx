@@ -3,15 +3,30 @@
 import { PostMetadata } from "@/utils/posts";
 import Link from "next/link";
 import { FC, useRef, useState } from "react";
-import { useIntersection, useWindowSize } from "react-use";
+import { useIntersection, useMouseHovered, useWindowSize } from "react-use";
 import { OnboardingThumbnail } from "./onboarding-thumbnail";
 import { SegmentedControl } from "./segmented-control";
+import { PuzzleSlackAppThumbnail } from "./thumbnails/puzzle-slack-app-thumbnail";
+import { PuzzleStripeAppThumbnail } from "./thumbnails/puzzle-stripe-app-thumbnail";
 import { TrWorkoutPlayerThumbnail } from "./tr-workout-player-thumbnail";
 
 export const ProjectsSection: FC<{ postsMetadata: PostMetadata[] }> = ({
   postsMetadata,
 }) => {
   const [category, setCategory] = useState("all");
+
+  const engineeringPostsMetadata = postsMetadata.filter((metadata) =>
+    metadata.tags.includes("engineering")
+  );
+  const designPostsMetadata = postsMetadata.filter((metadata) =>
+    metadata.tags.includes("design")
+  );
+  const filteredPostsMetadata =
+    category === "all"
+      ? postsMetadata
+      : category === "engineering"
+      ? engineeringPostsMetadata
+      : designPostsMetadata;
 
   return (
     <section className="flex flex-col items-center">
@@ -27,7 +42,7 @@ export const ProjectsSection: FC<{ postsMetadata: PostMetadata[] }> = ({
               <>
                 All{" "}
                 <span className={category === "all" ? "text-gray-500" : ""}>
-                  ({`${8}`})
+                  ({`${postsMetadata.length}`})
                 </span>
               </>
             ),
@@ -40,7 +55,7 @@ export const ProjectsSection: FC<{ postsMetadata: PostMetadata[] }> = ({
                 <span
                   className={category === "engineering" ? "text-gray-500" : ""}
                 >
-                  ({`${8}`})
+                  ({`${engineeringPostsMetadata.length}`})
                 </span>
               </>
             ),
@@ -51,7 +66,7 @@ export const ProjectsSection: FC<{ postsMetadata: PostMetadata[] }> = ({
               <>
                 Design/UX{" "}
                 <span className={category === "design" ? "text-gray-500" : ""}>
-                  ({`${8}`})
+                  ({`${designPostsMetadata.length}`})
                 </span>
               </>
             ),
@@ -62,8 +77,8 @@ export const ProjectsSection: FC<{ postsMetadata: PostMetadata[] }> = ({
         className="mb-12 w-full max-w-[360px]"
       />
 
-      <div className="grid max-w-[960px] grid-cols-1 gap-10 lg:grid-cols-2">
-        {postsMetadata.map((metadata) => {
+      <div className="grid max-w-[960px] grid-cols-1 gap-5 lg:grid-cols-2">
+        {filteredPostsMetadata.map((metadata) => {
           return (
             <Link key={metadata.slug} href={`/${metadata.slug}`}>
               <ProjectCard metadata={metadata} />
@@ -78,11 +93,15 @@ export const ProjectsSection: FC<{ postsMetadata: PostMetadata[] }> = ({
 const ProjectCard: FC<{ metadata: PostMetadata }> = ({ metadata }) => {
   const ProjectThumbnail = getThumbnail(metadata.slug);
   const [hovering, setHovering] = useState(false);
-  const intersectionRef = useRef(null);
-  const intersection = useIntersection(intersectionRef, {
+  const containerRef = useRef(null);
+  const intersection = useIntersection(containerRef, {
     root: null,
     rootMargin: "0px",
     threshold: 1,
+  });
+  const cursorPosition = useMouseHovered(containerRef, {
+    bound: true,
+    whenHovered: true,
   });
   const windowSize = useWindowSize();
   const mobile = windowSize.width < 640;
@@ -91,13 +110,22 @@ const ProjectCard: FC<{ metadata: PostMetadata }> = ({ metadata }) => {
 
   return (
     <div
-      ref={intersectionRef}
+      ref={containerRef}
       onMouseOver={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
-      className={`group relative flex h-80 flex-col overflow-hidden rounded-lg border-[1px] border-white border-opacity-10 bg-gray-950 px-4  sm:px-6`}
+      className={`group relative flex h-[300px] max-h-[300px] flex-col gap-4 overflow-hidden rounded-lg border-[1px] border-white border-opacity-10 bg-gray-950`}
     >
-      <div className="absolute inset-[1px] bg-project-card opacity-0 transition-opacity duration-100 group-hover:opacity-100" />
-      <header className="flex flex-col items-center p-6 text-center">
+      <div
+        className="absolute inset-[1px] z-50 opacity-0 transition-opacity duration-100 group-hover:opacity-100"
+        style={
+          {
+            "--x": `calc(${cursorPosition.elX} * 1px)`,
+            "--y": `calc(${cursorPosition.elY} * 1px)`,
+            background: `radial-gradient(420px circle at var(--x) var(--y),rgba(255,255,255,0.05),transparent)`,
+          } as any
+        }
+      />
+      <header className="flex flex-col items-center p-6 pb-4 text-center">
         <h3 className=" text-lg font-semibold text-gray-100">
           {metadata.title}
         </h3>
@@ -107,26 +135,51 @@ const ProjectCard: FC<{ metadata: PostMetadata }> = ({ metadata }) => {
           {metadata.company}
         </span>
       </header>
-      <ProjectThumbnail
-        active={active}
-        mobile={mobile}
-        className="relative bottom-[-8px]"
-      />
+      <div className="flex flex-grow flex-col items-center justify-center">
+        <ProjectThumbnail
+          active={active}
+          mobile={mobile}
+          // className="relative bottom-[-8px]"
+        />
+      </div>
     </div>
   );
 };
 
 function getThumbnail(slug: string) {
   switch (slug) {
+    case "hexagon-design-system": {
+      return TrWorkoutPlayerThumbnail;
+    }
+    case "hexagon-toolbar": {
+      return TrWorkoutPlayerThumbnail;
+    }
+    case "puzzle-dashboard": {
+      return OnboardingThumbnail;
+    }
     case "puzzle-onboarding": {
       return OnboardingThumbnail;
+    }
+    case "puzzle-slack-app": {
+      return PuzzleSlackAppThumbnail;
+    }
+    case "puzzle-spending-explorer": {
+      return OnboardingThumbnail;
+    }
+    case "puzzle-stripe-app": {
+      return PuzzleStripeAppThumbnail;
+    }
+    case "tr-mobile-app": {
+      return TrWorkoutPlayerThumbnail;
+    }
+    case "tr-training-plans": {
+      return TrWorkoutPlayerThumbnail;
     }
     case "tr-workout-player": {
       return TrWorkoutPlayerThumbnail;
     }
-    case "a": {
-      return () => <></>;
-      // return TrWorkoutPlayerThumbnail;
+    case "wish-wholesale": {
+      return TrWorkoutPlayerThumbnail;
     }
     default: {
       throw new Error(`Invalid slug: ${slug}`);

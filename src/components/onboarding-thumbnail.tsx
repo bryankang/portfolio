@@ -2,11 +2,11 @@
 
 import { CheckCircledIcon } from "@radix-ui/react-icons";
 import { FC, ReactNode } from "react";
-import { Thumbnail } from "./Thumbnail";
 import { BrexLogo } from "./brex-logo";
 import { MercuryLogo } from "./mercury-logo";
 import { PlaidLogo } from "./plaid-logo";
 import { PuzzleLogoFull } from "./puzzle-logo";
+import { Thumbnail } from "./thumbnail";
 import { UncheckedCircledIcon } from "./unchecked-circle-icon";
 
 export const OnboardingThumbnail: FC<{
