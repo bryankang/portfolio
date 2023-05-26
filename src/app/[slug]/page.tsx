@@ -21,7 +21,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
         }`}</span>
       </nav>
       <main>
-        <header className="mb-8">
+        <header className="mb-5">
           <h1 className="mb-2">{metadata.title}</h1>
           <div className="mb-3 text-sm text-gray-400">
             {[...metadata.roles, metadata.duration.text].join(" • ")}

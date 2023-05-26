@@ -16,7 +16,7 @@ export const ThumbnailContainer = forwardRef<
           ? undefined
           : `linear-gradient(120deg, rgba(48,48,61,0.5), rgba(48,48,61,0))`,
       }}
-      className={`flex min-h-[280px] flex-col items-center justify-center rounded-2xl  p-5 ${className}`}
+      className={`relative flex min-h-[280px] flex-col items-center justify-center overflow-hidden rounded-2xl  p-5 ${className}`}
       {...rest}
     >
       {children}

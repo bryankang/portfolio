@@ -22,7 +22,7 @@ export async function getPostsMetadata() {
       return post;
     })
   );
-  postsMetadata.sort((a, b) => (a.date < b.date ? -1 : 1));
+  postsMetadata.sort((a, b) => (a.date < b.date ? 1 : -1));
   return postsMetadata;
 }
 

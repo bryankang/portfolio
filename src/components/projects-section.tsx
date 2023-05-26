@@ -4,11 +4,12 @@ import { PostMetadata } from "@/utils/posts";
 import Link from "next/link";
 import { FC, useRef, useState } from "react";
 import { useIntersection, useMouseHovered, useWindowSize } from "react-use";
-import { OnboardingThumbnail } from "./onboarding-thumbnail";
 import { SegmentedControl } from "./segmented-control";
+import { PuzzleOnboardingThumbnail } from "./thumbnails/puzzle-onboarding-thumbnail";
 import { PuzzleSlackAppThumbnail } from "./thumbnails/puzzle-slack-app-thumbnail";
 import { PuzzleStripeAppThumbnail } from "./thumbnails/puzzle-stripe-app-thumbnail";
-import { TrWorkoutPlayerThumbnail } from "./tr-workout-player-thumbnail";
+import { TrPlanBuilderThumbnail } from "./thumbnails/tr-plan-builder-thumbnail";
+import { TrWorkoutPlayerThumbnail } from "./thumbnails/tr-workout-player-thumbnail";
 
 export const ProjectsSection: FC<{ postsMetadata: PostMetadata[] }> = ({
   postsMetadata,
@@ -29,7 +30,7 @@ export const ProjectsSection: FC<{ postsMetadata: PostMetadata[] }> = ({
       : designPostsMetadata;
 
   return (
-    <section className="flex flex-col items-center">
+    <section className="mb-40 flex flex-col items-center">
       <h2 className="mb-6 text-center text-xl text-gray-50  sm:text-2xl">
         Projects
       </h2>
@@ -113,7 +114,7 @@ const ProjectCard: FC<{ metadata: PostMetadata }> = ({ metadata }) => {
       ref={containerRef}
       onMouseOver={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
-      className={`group relative flex h-[300px] max-h-[300px] flex-col gap-4 overflow-hidden rounded-lg border-[1px] border-white border-opacity-10 bg-gray-950`}
+      className={`group relative flex h-[300px] max-h-[300px] flex-col overflow-hidden rounded-lg border-[1px] border-white border-opacity-10 bg-gray-950`}
     >
       <div
         className="absolute inset-[1px] z-50 opacity-0 transition-opacity duration-100 group-hover:opacity-100"
@@ -135,7 +136,7 @@ const ProjectCard: FC<{ metadata: PostMetadata }> = ({ metadata }) => {
           {metadata.company}
         </span>
       </header>
-      <div className="flex flex-grow flex-col items-center justify-center">
+      <div className="relative flex flex-grow flex-col items-center justify-center">
         <ProjectThumbnail
           active={active}
           mobile={mobile}
@@ -155,16 +156,16 @@ function getThumbnail(slug: string) {
       return TrWorkoutPlayerThumbnail;
     }
     case "puzzle-dashboard": {
-      return OnboardingThumbnail;
+      return PuzzleOnboardingThumbnail;
     }
     case "puzzle-onboarding": {
-      return OnboardingThumbnail;
+      return PuzzleOnboardingThumbnail;
     }
     case "puzzle-slack-app": {
       return PuzzleSlackAppThumbnail;
     }
     case "puzzle-spending-explorer": {
-      return OnboardingThumbnail;
+      return PuzzleOnboardingThumbnail;
     }
     case "puzzle-stripe-app": {
       return PuzzleStripeAppThumbnail;
@@ -172,8 +173,8 @@ function getThumbnail(slug: string) {
     case "tr-mobile-app": {
       return TrWorkoutPlayerThumbnail;
     }
-    case "tr-training-plans": {
-      return TrWorkoutPlayerThumbnail;
+    case "tr-plan-builder": {
+      return TrPlanBuilderThumbnail;
     }
     case "tr-workout-player": {
       return TrWorkoutPlayerThumbnail;

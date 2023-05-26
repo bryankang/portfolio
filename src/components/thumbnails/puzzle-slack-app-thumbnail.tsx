@@ -7,7 +7,7 @@ export const PuzzleSlackAppThumbnail: FC<{ active?: boolean }> = ({
 }) => {
   return (
     <Window
-      className={`flex h-[72px] max-w-[420px] items-center justify-between gap-4 py-3 pl-2 pr-4`}
+      className={`mb-12 flex h-[72px] w-11/12 max-w-[420px] items-center justify-between gap-4 py-3 pl-2 pr-4`}
     >
       <div className={`flex h-full items-center gap-2`}>
         <SlackLogo size={40} active={active} />

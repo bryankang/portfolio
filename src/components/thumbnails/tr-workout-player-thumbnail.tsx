@@ -1,15 +1,20 @@
 import { FC } from "react";
-import { Thumbnail } from "./thumbnail";
+import { Window } from "./window";
 
 export const TrWorkoutPlayerThumbnail: FC<{
   active?: boolean;
   mobile?: boolean;
+  fullscreen?: boolean;
   className?: string;
-}> = ({ active, mobile, className }) => {
+}> = ({ active, mobile, fullscreen, className }) => {
   return (
-    <Thumbnail className={`mt-3 h-full ${className}`}>
+    <Window
+      className={`${
+        fullscreen ? undefined : "mt-3 w-11/12 "
+      } h-full p-5 gradient-mask-b-20 sm:p-6 ${className}`}
+    >
       <div
-        className={`mb-6  text-center text-sm transition-colors ${
+        className={`mb-6 text-center text-sm transition-colors ${
           mobile ? "duration-300" : "duration-300"
         } sm:text-base ${active ? "text-gray-400" : "text-gray-600"}`}
       >
@@ -65,7 +70,7 @@ export const TrWorkoutPlayerThumbnail: FC<{
           </div>
         </div>
       </div>
-    </Thumbnail>
+    </Window>
   );
 };
 
@@ -121,11 +126,11 @@ const Chart: FC<{
   className?: string;
   active?: boolean;
   mobile?: boolean;
-}> = ({ width = 204 * 1.3, height = 119 * 1.3, className, active, mobile }) => {
+}> = ({ width = 204 * 1.2, height = 119 * 1.2, className, active, mobile }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width={width}
+      width={"100%"}
       height={height}
       viewBox="0 0 204 119"
       fill="none"

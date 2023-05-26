@@ -24,8 +24,8 @@ export default function RootLayout({
     <html lang="en" className="bg-gray-950 text-gray-50">
       <body className={`${inter.className}`}>
         <header className="fixed z-50 h-12 w-full sm:h-24">
-          <div className="absolute bottom-[-50%] left-0 right-0 top-0 backdrop-blur-md gradient-mask-b-0" />
-          <div className="absolute bottom-[-50%] left-0 right-0 top-0 backdrop-blur-md gradient-mask-b-0" />
+          <div className="pointer-events-none absolute bottom-[-75%] left-0 right-0 top-0 backdrop-blur-md gradient-mask-b-0" />
+          <div className="pointer-events-none absolute bottom-[-75%] left-0 right-0 top-0 backdrop-blur-md gradient-mask-b-0" />
           <div className="relative h-full px-5 sm:px-6">
             <div className="relative mx-auto h-full max-w-[960px]">
               <div className="flex h-full items-center justify-between">
