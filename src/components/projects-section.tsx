@@ -80,7 +80,7 @@ export const ProjectsSection: FC<{ postsMetadata: PostMetadata[] }> = ({
         className="mb-8 w-full max-w-[360px]"
       />
 
-      <div className="grid max-w-[960px] grid-cols-1 gap-5 lg:grid-cols-2">
+      <div className="grid w-full max-w-[960px] grid-cols-1 gap-5 lg:grid-cols-2">
         {filteredPostsMetadata.map((metadata) => {
           return (
             <Link key={metadata.slug} href={`/${metadata.slug}`}>
