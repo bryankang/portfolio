@@ -28,7 +28,7 @@ export const TrWorkoutPlayerThumbnail: FC<{
             mobile ? "duration-300" : "duration-300"
           } sm:mr-10 ${active ? "opacity-100" : "opacity-50"}`}
         />
-        <div className="flex min-w-[20%] flex-col gap-1">
+        <div className="flex w-[30%] min-w-[72px] flex-col gap-1">
           <div className="flex shrink-0 items-center gap-1.5 ">
             <Dot
               mobile={mobile}
@@ -87,7 +87,7 @@ const Dot: FC<{ className?: string; mobile?: boolean }> = ({
       xmlns="http://www.w3.org/2000/svg"
       className={`transition-colors ${
         mobile ? "duration-300" : "duration-300"
-      } ${className}`}
+      } shrink-0 ${className}`}
     >
       <g filter="url(#filter0_f_62_1567)">
         <circle cx="7" cy="7" r="3" fill="currentColor" />
