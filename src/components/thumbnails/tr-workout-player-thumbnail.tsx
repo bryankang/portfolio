@@ -29,7 +29,7 @@ export const TrWorkoutPlayerThumbnail: FC<{
           } sm:mr-10 ${active ? "opacity-100" : "opacity-50"}`}
         />
         <div className="flex min-w-[20%] flex-col gap-1">
-          <div className="flex items-center gap-1.5 ">
+          <div className="flex shrink-0 items-center gap-1.5 ">
             <Dot
               mobile={mobile}
               className={`${active ? "text-[#57B1F2]" : "text-gray-600"}`}
@@ -42,7 +42,7 @@ export const TrWorkoutPlayerThumbnail: FC<{
               Power
             </div>
           </div>
-          <div className="flex items-center gap-1.5">
+          <div className="flex shrink-0 items-center gap-1.5">
             <Dot
               mobile={mobile}
               className={`${active ? "text-[#F6D681]" : "text-gray-600"}`}
@@ -55,7 +55,7 @@ export const TrWorkoutPlayerThumbnail: FC<{
               Cadence
             </div>
           </div>
-          <div className="flex items-center gap-1.5">
+          <div className="flex shrink-0 items-center gap-1.5">
             <Dot
               mobile={mobile}
               className={`${active ? "text-[#E271A7]" : "text-gray-600"}`}
