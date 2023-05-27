@@ -1,4 +1,5 @@
-import { TrWorkoutPlayerThumbnail } from "../components/tr-workout-player-thumbnail";
+import { HexagonToolbarThumbnail } from "../components/thumbnails/hexagon-toolbar-thumbnail";
+import { ThumbnailContainer } from "../components/thumbnails/thumbnail-container";
 
 export const metadata = {
   title: "Toolbar",
@@ -8,6 +9,8 @@ export const metadata = {
   tags: ["engineering", "design"],
 };
 
-<TrWorkoutPlayerThumbnail active />
+<ThumbnailContainer>
+  <HexagonToolbarThumbnail active fullscreen />
+</ThumbnailContainer>
 
 Hexagon PPM Toolbar

@@ -2,12 +2,15 @@ import { FC } from "react";
 import { SlackLogo } from "../logos";
 import { Window } from "./window";
 
-export const PuzzleSlackAppThumbnail: FC<{ active?: boolean }> = ({
-  active,
-}) => {
+export const PuzzleSlackAppThumbnail: FC<{
+  active?: boolean;
+  fullscreen?: boolean;
+}> = ({ active, fullscreen }) => {
   return (
     <Window
-      className={`mb-12 flex h-[72px] w-11/12 max-w-[420px] items-center justify-between gap-4 py-3 pl-2 pr-4`}
+      className={`${
+        fullscreen ? undefined : "mb-12"
+      } flex h-[72px] w-11/12 max-w-[420px] items-center justify-between gap-4 py-3 pl-2 pr-4`}
     >
       <div className={`flex h-full items-center gap-2`}>
         <SlackLogo size={40} active={active} />
@@ -30,7 +33,7 @@ export const PuzzleSlackAppThumbnail: FC<{ active?: boolean }> = ({
       </div>
 
       <div
-        className={` duration-300inline-flex items-center justify-center rounded-sm border border-gray-800 px-2 py-1 text-[12px] font-medium transition-colors ${
+        className={` inline-flex items-center justify-center rounded-sm border border-gray-800 px-2 py-1 text-[12px] font-medium transition-colors duration-300 ${
           active ? "text-gray-200" : "text-gray-500"
         }`}
       >

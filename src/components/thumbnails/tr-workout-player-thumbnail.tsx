@@ -16,7 +16,7 @@ export const TrWorkoutPlayerThumbnail: FC<{
       <div
         className={`mb-6 text-center text-sm transition-colors ${
           mobile ? "duration-300" : "duration-300"
-        } sm:text-base ${active ? "text-gray-400" : "text-gray-600"}`}
+        } sm:text-base ${active ? "text-gray-300" : "text-gray-600"}`}
       >
         Twin Peaks +1
       </div>
@@ -28,7 +28,7 @@ export const TrWorkoutPlayerThumbnail: FC<{
             mobile ? "duration-300" : "duration-300"
           } sm:mr-10 ${active ? "opacity-100" : "opacity-50"}`}
         />
-        <div className="flex flex-col gap-1 ">
+        <div className="flex min-w-[20%] flex-col gap-1">
           <div className="flex items-center gap-1.5 ">
             <Dot
               mobile={mobile}

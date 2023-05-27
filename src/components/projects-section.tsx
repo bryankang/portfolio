@@ -5,11 +5,13 @@ import Link from "next/link";
 import { FC, useRef, useState } from "react";
 import { useIntersection, useMouseHovered, useWindowSize } from "react-use";
 import { SegmentedControl } from "./segmented-control";
+import { HexagonToolbarThumbnail } from "./thumbnails/hexagon-toolbar-thumbnail";
 import { PuzzleOnboardingThumbnail } from "./thumbnails/puzzle-onboarding-thumbnail";
 import { PuzzleSlackAppThumbnail } from "./thumbnails/puzzle-slack-app-thumbnail";
 import { PuzzleStripeAppThumbnail } from "./thumbnails/puzzle-stripe-app-thumbnail";
 import { TrPlanBuilderThumbnail } from "./thumbnails/tr-plan-builder-thumbnail";
 import { TrWorkoutPlayerThumbnail } from "./thumbnails/tr-workout-player-thumbnail";
+import { WishWholesaleThumbnail } from "./thumbnails/wish-wholesale-thumbnail";
 
 export const ProjectsSection: FC<{ postsMetadata: PostMetadata[] }> = ({
   postsMetadata,
@@ -153,7 +155,7 @@ function getThumbnail(slug: string) {
       return TrWorkoutPlayerThumbnail;
     }
     case "hexagon-toolbar": {
-      return TrWorkoutPlayerThumbnail;
+      return HexagonToolbarThumbnail;
     }
     case "puzzle-dashboard": {
       return PuzzleOnboardingThumbnail;
@@ -180,7 +182,7 @@ function getThumbnail(slug: string) {
       return TrWorkoutPlayerThumbnail;
     }
     case "wish-wholesale": {
-      return TrWorkoutPlayerThumbnail;
+      return WishWholesaleThumbnail;
     }
     default: {
       throw new Error(`Invalid slug: ${slug}`);
