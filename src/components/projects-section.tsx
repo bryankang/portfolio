@@ -3,7 +3,7 @@
 import { PostMetadata } from "@/utils/posts";
 import Link from "next/link";
 import { FC, useRef, useState } from "react";
-import { useIntersection, useMouseHovered, useWindowSize } from "react-use";
+import { useIntersection, useMedia, useMouseHovered } from "react-use";
 import { SegmentedControl } from "./segmented-control";
 import { HexagonToolbarThumbnail } from "./thumbnails/hexagon-toolbar-thumbnail";
 import { PuzzleOnboardingThumbnail } from "./thumbnails/puzzle-onboarding-thumbnail";
@@ -106,8 +106,7 @@ const ProjectCard: FC<{ metadata: PostMetadata }> = ({ metadata }) => {
     bound: true,
     whenHovered: true,
   });
-  const windowSize = useWindowSize();
-  const mobile = windowSize.width < 640;
+  const mobile = !useMedia("(min-width: 640px)");
 
   const active = hovering || mobile;
 
