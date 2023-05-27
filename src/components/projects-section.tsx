@@ -109,7 +109,7 @@ const ProjectCard: FC<{ metadata: PostMetadata }> = ({ metadata }) => {
   const windowSize = useWindowSize();
   const mobile = windowSize.width < 640;
 
-  const active = hovering || (mobile && !!intersection?.isIntersecting);
+  const active = hovering || mobile;
 
   return (
     <div
