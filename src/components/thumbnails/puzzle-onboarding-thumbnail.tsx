@@ -18,7 +18,7 @@ export const PuzzleOnboardingThumbnail: FC<{
   return (
     <Window
       className={`${
-        fullscreen ? undefined : "mt-3 w-11/12"
+        fullscreen ? "w-full" : "mt-3 w-11/12"
       } flex flex-grow gap-5 p-5 gradient-mask-b-20 sm:p-6 ${className}`}
     >
       <div className="flex-shrink-0">
