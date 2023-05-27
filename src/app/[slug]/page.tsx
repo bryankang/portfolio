@@ -7,7 +7,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
   const { Content, metadata } = await loadPost(`${params.slug}.mdx`);
 
   return (
-    <div className="prose prose-invert mx-auto min-h-screen px-5">
+    <div className="prose prose-invert mx-auto px-5">
       <nav className="mb-6 flex items-center gap-0.5 pt-5 text-xs sm:pt-20">
         <Link
           href="/"

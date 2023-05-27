@@ -77,7 +77,7 @@ export const ProjectsSection: FC<{ postsMetadata: PostMetadata[] }> = ({
         ]}
         value={category}
         onChange={(value) => setCategory(value)}
-        className="mb-12 w-full max-w-[360px]"
+        className="mb-8 w-full max-w-[360px]"
       />
 
       <div className="grid max-w-[960px] grid-cols-1 gap-5 lg:grid-cols-2">
