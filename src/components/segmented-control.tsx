@@ -8,7 +8,7 @@ export const SegmentedControl: FC<{
 }> = ({ items, value, onChange, className }) => {
   return (
     <div
-      className={`flex h-7 items-center gap-0.5 rounded-lg border-[1px] border-white border-opacity-5 bg-gray-900 p-0.5 ${className}`}
+      className={`flex h-[30px] items-center gap-0.5 rounded-lg border-[1px] border-white border-opacity-5 bg-gray-900 p-0.5 ${className}`}
     >
       {items.map((item, index) => {
         return (
@@ -16,7 +16,7 @@ export const SegmentedControl: FC<{
             {index > 0 && <div className="h-5 w-[1px] flex-none bg-gray-800" />}
             <button
               onClick={() => onChange(item.value)}
-              className={`h-full flex-grow basis-0 select-none rounded text-[11px] focus-visible:outline-none ${
+              className={`h-full flex-grow basis-0 select-none rounded text-[12px] focus-visible:outline-none ${
                 item.value === value
                   ? "text-gray-50"
                   : "text-gray-500 transition-colors duration-75 hover:text-gray-400"

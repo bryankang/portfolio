@@ -115,7 +115,7 @@ const ProjectCard: FC<{ metadata: PostMetadata }> = ({ metadata }) => {
       ref={containerRef}
       onMouseOver={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
-      className={`group relative flex h-[300px] max-h-[300px] w-full flex-col items-stretch overflow-hidden rounded-lg border-[1px] border-white border-opacity-10 bg-gray-950`}
+      className={`group relative flex h-[300px] max-h-[300px] w-full flex-col items-stretch overflow-hidden rounded-lg border-[1px] border-white border-opacity-[12%] bg-gray-950`}
     >
       <div
         className="absolute inset-[1px] z-50 opacity-0 transition-opacity duration-100 group-hover:opacity-100"
