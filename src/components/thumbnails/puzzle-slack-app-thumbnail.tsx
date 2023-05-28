@@ -33,7 +33,7 @@ export const PuzzleSlackAppThumbnail: FC<{
       </div>
 
       <div
-        className={` inline-flex items-center justify-center rounded-sm border border-gray-800 px-2 py-1 text-[12px] font-medium transition-colors duration-300 ${
+        className={` inline-flex items-center justify-center rounded-md border border-gray-800 px-2 py-1 text-[12px] font-medium transition-colors duration-300 ${
           active ? "text-gray-200" : "text-gray-500"
         }`}
       >
