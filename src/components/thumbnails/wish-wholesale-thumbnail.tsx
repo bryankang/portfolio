@@ -13,8 +13,8 @@ export const WishWholesaleThumbnail: FC<{
     >
       <WishLogo active={active} />
       <div
-        className={`text-xs tracking-widest transition-colors duration-300 ${
-          active ? "text-gray-400" : "text-gray-500"
+        className={`text-xs font-medium tracking-widest transition-colors duration-300 ${
+          active ? "text-gray-500" : "text-gray-600"
         }`}
       >
         WHOLESALE

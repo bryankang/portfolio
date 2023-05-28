@@ -3,7 +3,7 @@
 import { PostMetadata } from "@/utils/posts";
 import Link from "next/link";
 import { FC, useRef, useState } from "react";
-import { useIntersection, useMedia, useMouseHovered } from "react-use";
+import { useIntersection, useMouseHovered, useWindowSize } from "react-use";
 import { SegmentedControl } from "./segmented-control";
 import { HexagonToolbarThumbnail } from "./thumbnails/hexagon-toolbar-thumbnail";
 import { PuzzleOnboardingThumbnail } from "./thumbnails/puzzle-onboarding-thumbnail";
@@ -67,7 +67,7 @@ export const ProjectsSection: FC<{ postsMetadata: PostMetadata[] }> = ({
             value: "design",
             content: (
               <>
-                Design/UX{" "}
+                Design{" "}
                 <span className={category === "design" ? "text-gray-500" : ""}>
                   ({`${designPostsMetadata.length}`})
                 </span>
@@ -106,7 +106,8 @@ const ProjectCard: FC<{ metadata: PostMetadata }> = ({ metadata }) => {
     bound: true,
     whenHovered: true,
   });
-  const mobile = !useMedia("(min-width: 640px)");
+  const { width } = useWindowSize();
+  const mobile = width < 768;
 
   const active = hovering || mobile;
 

@@ -14,7 +14,7 @@ function getTagName(tag: string) {
   if (tag === "engineering") {
     return "Engineering";
   } else if (tag === "design") {
-    return "Design/UX";
+    return "Design";
   }
   throw new Error(`Invalid tag: ${tag}`);
 }

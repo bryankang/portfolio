@@ -126,8 +126,8 @@ export const TrPlanBuilderThumbnail: FC<{
       </div>
       <div className={`flex flex-col gap-2 px-4 py-5`}>
         <span
-          className={`transition-colors duration-300 ${
-            active ? "text-gray-100" : "text-gray-400"
+          className={`font-medium transition-colors duration-300 ${
+            active ? "text-gray-100" : "text-gray-500"
           }`}
         >
           Choose your training volume

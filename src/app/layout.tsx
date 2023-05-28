@@ -5,6 +5,7 @@ import {
   LinkedInLogoIcon,
 } from "@radix-ui/react-icons";
 import { Inter } from "next/font/google";
+import Head from "next/head";
 import Link from "next/link";
 import "./globals.css";
 
@@ -22,6 +23,20 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="bg-gray-950 text-gray-50">
+      <Head>
+        <title>Bryan Kang - Designer + Engineer</title>
+        <meta
+          name="description"
+          content="My design/engineering portfolio"
+          key="desc"
+        />
+        <meta property="og:title" content="Bryan Kang - Designer + Engineer" />
+        <meta
+          property="og:description"
+          content="My design/engineering portfolio"
+        />
+        <meta property="og:image" content="/metadata-image.png" />
+      </Head>
       <body className={`${inter.className}`}>
         <header className="fixed z-50 h-12 w-full sm:h-24">
           <div className="pointer-events-none absolute bottom-[-75%] left-0 right-0 top-0 backdrop-blur-md gradient-mask-b-0" />
