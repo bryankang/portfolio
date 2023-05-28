@@ -32,8 +32,8 @@
     @apply font-normal
   }
 
-  .prose h1 {
-    /* @apply font-medium */
+  .prose img {
+    @apply rounded-2xl
   }
 }
 

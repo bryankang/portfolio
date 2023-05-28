@@ -1,5 +1,6 @@
 import { PuzzleSlackAppThumbnail } from "../components/thumbnails/puzzle-slack-app-thumbnail";
 import { ThumbnailContainer } from "../components/thumbnails/thumbnail-container";
+import { PuzzleSummary } from "../components/company-summaries/puzzle-summary";
 
 export const metadata = {
   title: "Slack App",
@@ -9,10 +10,18 @@ export const metadata = {
   tags: ["engineering"],
 };
 
-{/* <OnboardingThumbnail active className="not-prose" /> */}
-
 <ThumbnailContainer>
   <PuzzleSlackAppThumbnail active fullscreen />
 </ThumbnailContainer>
 
-Slack App
+<PuzzleSummary />
+
+As part of the user growth team at [Puzzle](https://puzzle.io), we added various features that helped users start using the app right away, such as a new user checklist. In addition, we worked on features that drove user engagement. One of these features was a slack integration for weekly updates.
+
+Our customers were mostly early stage startups, and we realized Slack is the primary form of communication within these companies. And since they're almost always on Slack, we saw an opportunity to increase user engagement by integrating with Slack. Users can now see a summary of their company's financial reports via a Slack channel!
+
+![Sample slack notification](/puzzle-slack-app/slack-notification-sample.png)
+
+We show an abridged version of their company's finances and compare them to the previous month. Following this information, we highlight what actions the user should take in order to increase engagement, which is pretty much the main goal of this feature.
+
+Under the hood, we use the `incoming-webhook` [method](https://api.slack.com/authentication/quickstart#webhooks) of integration which ties the weekly updates to a specific Slack channel that the user sets. Since our notification system is powered by [Knock](https://knock.app/), we leveraged their Slack integration so that we could also send notifications via email or even within the app itself - all in a single place (We do in fact send weekly updates via email).
