@@ -3,7 +3,7 @@
 import { PostMetadata } from "@/utils/posts";
 import Link from "next/link";
 import { FC, useRef, useState } from "react";
-import { useIntersection, useMouseHovered, useWindowSize } from "react-use";
+import { useMedia, useMouseHovered } from "react-use";
 import { SegmentedControl } from "./segmented-control";
 import { HexagonToolbarThumbnail } from "./thumbnails/hexagon-toolbar-thumbnail";
 import { PuzzleOnboardingThumbnail } from "./thumbnails/puzzle-onboarding-thumbnail";
@@ -94,20 +94,16 @@ export const ProjectsSection: FC<{ postsMetadata: PostMetadata[] }> = ({
 };
 
 const ProjectCard: FC<{ metadata: PostMetadata }> = ({ metadata }) => {
+  const [_, reset] = useState({});
   const ProjectThumbnail = getThumbnail(metadata.slug);
   const [hovering, setHovering] = useState(false);
   const containerRef = useRef(null);
-  const intersection = useIntersection(containerRef, {
-    root: null,
-    rootMargin: "0px",
-    threshold: 1,
-  });
   const cursorPosition = useMouseHovered(containerRef, {
     bound: true,
     whenHovered: true,
   });
-  const { width } = useWindowSize();
-  const mobile = width < 768;
+  const desktop = useMedia("(min-width: 768px)", false);
+  const mobile = !desktop;
 
   const active = hovering || mobile;
 
@@ -139,11 +135,7 @@ const ProjectCard: FC<{ metadata: PostMetadata }> = ({ metadata }) => {
         </span>
       </header>
       <div className="relative flex flex-grow flex-col items-center justify-center">
-        <ProjectThumbnail
-          active={active}
-          mobile={mobile}
-          // className="relative bottom-[-8px]"
-        />
+        <ProjectThumbnail active={active} mobile={mobile} />
       </div>
     </div>
   );
