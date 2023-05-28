@@ -4,6 +4,7 @@ import {
   FileTextIcon,
   LinkedInLogoIcon,
 } from "@radix-ui/react-icons";
+import { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Head from "next/head";
 import Link from "next/link";
@@ -11,9 +12,13 @@ import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Bryan Kang - Designer + Engineer",
   description: "Bryan Kang's portfolio",
+  openGraph: {
+    title: "Bryan Kang - Designer + Engineer",
+    description: "Bryan Kang's portfolio",
+  },
 };
 
 export default function RootLayout({
@@ -24,18 +29,18 @@ export default function RootLayout({
   return (
     <html lang="en" className="bg-gray-950 text-gray-50">
       <Head>
-        <title>Bryan Kang - Designer + Engineer</title>
+        {/* <title>Bryan Kang - Designer + Engineer</title>
         <meta
           name="description"
           content="My design/engineering portfolio"
           key="desc"
-        />
-        <meta property="og:title" content="Bryan Kang - Designer + Engineer" />
+        /> */}
+        {/* <meta property="og:title" content="Bryan Kang - Designer + Engineer" />
         <meta
           property="og:description"
           content="My design/engineering portfolio"
         />
-        <meta property="og:image" content="/metadata-image.png" />
+        <meta property="og:image" content="/metadata-image.png" /> */}
       </Head>
       <body className={`${inter.className}`}>
         <header className="fixed z-50 h-12 w-full sm:h-24">
