@@ -4,6 +4,7 @@ import {
   FileTextIcon,
   LinkedInLogoIcon,
 } from "@radix-ui/react-icons";
+import { Analytics } from "@vercel/analytics/react";
 import { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Link from "next/link";
@@ -71,6 +72,7 @@ export default function RootLayout({
         </header>
         <div className="pt-12 sm:pt-24">{children}</div>
       </body>
+      <Analytics />
     </html>
   );
 }
