@@ -12,10 +12,10 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Bryan Kang (Designer + Engineer)",
+  title: "Bryan Kang (Engineer + Designer)",
   description: "Bryan Kang's portfolio",
   openGraph: {
-    title: "Bryan Kang (Designer + Engineer)",
+    title: "Bryan Kang (Engineer + Designer)",
     description: "Bryan Kang's portfolio",
   },
 };
