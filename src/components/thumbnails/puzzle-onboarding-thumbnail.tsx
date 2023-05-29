@@ -121,7 +121,7 @@ const Step: FC<{
           <div
             className={`absolute left-[4.5px] top-[9px] h-3 w-[1px] transition-colors ${
               mobile ? "duration-300" : "duration-300"
-            } sm:left-[7.5px] sm:top-[15px] sm:h-3  ${
+            } sm:left-[7.5px] sm:top-[15px] sm:h-[0.725rem]  ${
               active
                 ? completed
                   ? "bg-[#50FAAB]"

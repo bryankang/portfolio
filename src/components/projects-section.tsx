@@ -32,7 +32,7 @@ export const ProjectsSection: FC<{ postsMetadata: PostMetadata[] }> = ({
       : designPostsMetadata;
 
   return (
-    <section className="mb-40 flex flex-col items-center">
+    <section className="flex flex-col items-center">
       <h2 className="mb-6 text-center text-xl text-gray-50  sm:text-2xl">
         Projects
       </h2>

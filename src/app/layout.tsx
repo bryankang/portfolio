@@ -27,7 +27,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="bg-gray-950 text-gray-50">
-      <body className={`${inter.className}`}>
+      <body className={`pb-20 ${inter.className}`}>
         <header className="fixed z-50 h-12 w-full sm:h-24">
           <div className="pointer-events-none absolute bottom-[-75%] left-0 right-0 top-0 backdrop-blur-md gradient-mask-b-0" />
           <div className="pointer-events-none absolute bottom-[-75%] left-0 right-0 top-0 backdrop-blur-md gradient-mask-b-0" />

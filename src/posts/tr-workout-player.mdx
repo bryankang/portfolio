@@ -1,15 +1,21 @@
 import { TrWorkoutPlayerThumbnail } from "../components/thumbnails/tr-workout-player-thumbnail";
 import { ThumbnailContainer } from "../components/thumbnails/thumbnail-container";
+import { TrSummary } from "../components/company-summaries/tr-summary";
 
 export const metadata = {
   title: "Workout Player",
   company: "TrainerRoad",
   roles: ["Lead engineer"],
   date: "2023-12-12",
-  tags: ["engineering", "design"],
+  tags: ["engineering"],
 };
 
-{" "}
 <TrWorkoutPlayerThumbnail active fullscreen />
 
-TrainerRoad workoutplayer
+<TrSummary />
+
+The Workout Player is one of the essential features on TrainerRoad, in addition to the calendar and training plans. It's basically a real-time chart that tracks data for power, cadence and heart rate that I implemented in React Native.
+
+Nobody in the team had any React Native experience, including me. Much of the early stages of development was experimenting with different libraries, from heavyweights like Victory or low level using D3.js. We record data every second, and because a workout can last up to 6-8 hours, we knew it had to be efficient and performant. It was on a mobile device, and we don't have the luxury of high performance, and battery life is a huge factor. Through experimentation, I landed on using React Native Modules to build the real-time chart.
+
+Since performance and efficiency are so important, one of the techniques I used is one that is used by many drawing apps. For every X number of data points drawn, you take a screenshot of the data points and only draw the consecutive points until you reach the threshold again. At which point, you would repeat the process of screenshotting and drawing. You can learn more about the technique [here](https://medium.com/@almalehdev/high-performance-drawing-on-ios-part-1-f3a24a0dcb31).

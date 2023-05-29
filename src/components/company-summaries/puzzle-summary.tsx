@@ -20,7 +20,8 @@ export const PuzzleSummary: FC = () => {
       Existing accounting software, such as Quickbooks and Xero, are extremely
       convoluted and unintuitive to use. We want to optimize the user experience
       for founders and also to help them understand their company’s finances in
-      real-time.
+      real-time. I worked primarily in growth and partnership teams as a
+      frontend developer.
     </CompanySummary>
   );
 };

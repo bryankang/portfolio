@@ -20,4 +20,5 @@ export * from "./postmark-logo";
 export * from "./puzzle-logo";
 export * from "./ramp-logo";
 export * from "./slack-logo";
+export * from "./tr-logo";
 export * from "./varos-logo";

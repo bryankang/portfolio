@@ -1,5 +1,6 @@
 import { WishWholesaleThumbnail } from "../components/thumbnails/wish-wholesale-thumbnail";
 import { ThumbnailContainer } from "../components/thumbnails/thumbnail-container";
+import { WishSummary } from "../components/company-summaries/wish-summary";
 
 export const metadata = {
   title: "Wish Wholesale",
@@ -13,4 +14,14 @@ export const metadata = {
   <WishWholesaleThumbnail active fullscreen />
 </ThumbnailContainer>
 
-Slack App
+<WishSummary />
+
+At Wish, I worked primarily on the Wish Wholesale project. We had data that there were a lot of users who were reselling products they got from our platform from dropshippers to brick and mortar store owners.
+
+We initially started out as a Shopify site which proved our hypothesis that there was a market for resellers. However, Shopify's primary target end users are consumers, not resellers, and it didn't provide them with the best user experience. For example, resellers don't necessarily want to filter by only what they have to pay - they want to filter by the margins. Or tiered discounts on bulk purchases.
+
+We built the entire B2B platform from scratch. As the only frontend developer, I built everything from onboarding to product catalog to cart and checkout pages.
+
+![Onboarding screenshot](/wish-wholesale/onboarding.png)
+
+![Order confirmation screenshot](/wish-wholesale/order-confirmation.png)

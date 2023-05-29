@@ -1,5 +1,6 @@
 import { HexagonToolbarThumbnail } from "../components/thumbnails/hexagon-toolbar-thumbnail";
 import { ThumbnailContainer } from "../components/thumbnails/thumbnail-container";
+import { HexagonSummary } from "../components/company-summaries/hexagon-summary";
 
 export const metadata = {
   title: "Toolbar",
@@ -13,4 +14,10 @@ export const metadata = {
   <HexagonToolbarThumbnail active fullscreen />
 </ThumbnailContainer>
 
-Hexagon PPM Toolbar
+<HexagonSummary />
+
+From my experience, you don't get much time to work on micro-interactions as they aren't essential to the app. As cool as they are and to implement, they don't provide much business value. However, there are exceptions.
+
+We were designing and implementing components for a tablet app. We already had a desktop app, which we had the luxury of fitting a numerous icons and actions. But there's not much real estate to work with on a tablet. We needed to figure out a way to show as many icons and actions as we possibly could without sacrificing too many features that exist in the desktop app.
+
+Micro-interaction became essential to our design and implementation. Users could enter a specific mode and within that mode, the top-level toolbar is replaced by the secondary toolbar. Without any animation, it's extremely jarring and confusing as this is not a common pattern that they're used to.

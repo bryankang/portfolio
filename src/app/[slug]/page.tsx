@@ -20,7 +20,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
           metadata.company && `(${metadata.company})`
         }`}</span>
       </nav>
-      <main>
+      <main className="">
         <header className="mb-5">
           <h1 className="mb-2">{metadata.title}</h1>
           <div className="mb-3 text-sm text-gray-400">
