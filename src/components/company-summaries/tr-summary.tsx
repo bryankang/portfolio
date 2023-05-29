@@ -7,7 +7,7 @@ const Brand: FC = () => {
     <div
       className={`flex items-center gap-1.5 text-sm font-semibold text-gray-100`}
     >
-      <TrLogo size={20} active className={`rounded-[2px]`} />
+      <TrLogo size={20} active className={`!rounded-[2px]`} />
       TrainerRoad
     </div>
   );
