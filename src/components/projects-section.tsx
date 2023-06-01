@@ -115,7 +115,7 @@ const ProjectCard: FC<{ metadata: PostMetadata }> = ({ metadata }) => {
       className={`group relative flex h-[300px] max-h-[300px] w-full flex-col items-stretch overflow-hidden rounded-lg border-[1px] border-white border-opacity-[12%] bg-gray-950`}
     >
       <div
-        className="absolute inset-0 z-50 opacity-0 transition-opacity duration-100 group-hover:opacity-100"
+        className="absolute inset-0 z-10 opacity-0 transition-opacity duration-100 group-hover:opacity-100"
         style={
           {
             "--x": `calc(${cursorPosition.elX} * 1px)`,
